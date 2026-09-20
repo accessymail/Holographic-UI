@@ -61,7 +61,7 @@
     "jsdom": "26.1.0",
     "typescript": "5.9.2",
     "vite": "7.3.6",
-    "vitest": "4.1.11"
+    "vitest": "5.0.1"
   },
   "author": "Holographic UI contributors (with ChatGPT as engineering copilot)",
   "keywords": [
