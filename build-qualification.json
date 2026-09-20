@@ -1,0 +1,62 @@
+{
+  "generatedAt": "2026-09-19T16:28:29.987Z",
+  "version": "1.0.0-rc.15",
+  "environment": {
+    "node": "v22.16.0",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "results": [
+    {
+      "name": "version-format",
+      "status": "PASS",
+      "detail": "1.0.0-rc.15"
+    },
+    {
+      "name": "node-runtime",
+      "status": "PASS",
+      "detail": "v22.16.0"
+    },
+    {
+      "name": "package-lock",
+      "status": "BLOCKED",
+      "detail": "required for npm ci"
+    },
+    {
+      "name": "cargo-lock",
+      "status": "BLOCKED",
+      "detail": "required for deterministic Cargo builds"
+    },
+    {
+      "name": "npm-ci",
+      "status": "BLOCKED",
+      "detail": "package-lock.json unavailable"
+    },
+    {
+      "name": "typecheck",
+      "status": "BLOCKED",
+      "detail": "package-lock.json unavailable"
+    },
+    {
+      "name": "tests",
+      "status": "BLOCKED",
+      "detail": "package-lock.json unavailable"
+    },
+    {
+      "name": "build",
+      "status": "BLOCKED",
+      "detail": "package-lock.json unavailable"
+    },
+    {
+      "name": "cargo-toolchain",
+      "status": "BLOCKED",
+      "detail": "cargo unavailable"
+    },
+    {
+      "name": "cargo-check-locked",
+      "status": "BLOCKED",
+      "detail": "Cargo toolchain or Cargo.lock unavailable"
+    }
+  ],
+  "certification": "BLOCKED"
+}

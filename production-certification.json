@@ -1,0 +1,88 @@
+{
+  "schema": "hui/production-certification/1",
+  "generatedAt": "2026-09-19T18:04:32.214Z",
+  "version": "1.0.0-rc.18-production-candidate",
+  "certification": "NOT_CERTIFIED",
+  "principle": "Missing evidence is never converted to PASS.",
+  "results": [
+    {
+      "id": "immutable-source-history",
+      "status": "REQUIRES_EVIDENCE",
+      "description": "Repository commit/review history is available and independently reviewable."
+    },
+    {
+      "id": "dependency-lockfiles",
+      "status": "BLOCKED",
+      "description": "package-lock.json and src-tauri/Cargo.lock are present.",
+      "missing": [
+        "package-lock.json",
+        "src-tauri/Cargo.lock"
+      ]
+    },
+    {
+      "id": "dependency-install",
+      "status": "REQUIRES_EVIDENCE",
+      "description": "npm ci --ignore-scripts completed successfully in a clean environment."
+    },
+    {
+      "id": "web-verification",
+      "status": "REQUIRES_EVIDENCE",
+      "description": "Typecheck, unit tests, production build, and protocol validation passed."
+    },
+    {
+      "id": "native-verification",
+      "status": "REQUIRES_EVIDENCE",
+      "description": "Rust/Tauri compilation and native qualification passed on every supported target."
+    },
+    {
+      "id": "security-scans",
+      "status": "REQUIRES_EVIDENCE",
+      "description": "SAST, secrets scanning, dependency scanning, and CodeQL have no release blockers."
+    },
+    {
+      "id": "native-authorization",
+      "status": "REQUIRES_EVIDENCE",
+      "description": "Capability/session/expiry/replay/rate/fail-closed controls passed native tests."
+    },
+    {
+      "id": "os-isolation",
+      "status": "REQUIRES_EVIDENCE",
+      "description": "OS-level sandboxing and privilege separation are implemented and evidenced."
+    },
+    {
+      "id": "ipc-fuzzing",
+      "status": "REQUIRES_EVIDENCE",
+      "description": "Native IPC fuzzing/property testing is complete with no unresolved release findings."
+    },
+    {
+      "id": "sbom",
+      "status": "REQUIRES_EVIDENCE",
+      "description": "SBOM was generated from the exact release build."
+    },
+    {
+      "id": "provenance",
+      "status": "REQUIRES_EVIDENCE",
+      "description": "Build provenance/attestation exists for the exact release artifacts."
+    },
+    {
+      "id": "signed-release",
+      "status": "REQUIRES_EVIDENCE",
+      "description": "Release artifacts are signed and signature verification passed."
+    },
+    {
+      "id": "cross-platform",
+      "status": "REQUIRES_EVIDENCE",
+      "description": "All supported platform qualification gates passed."
+    },
+    {
+      "id": "vulnerability-register",
+      "status": "REQUIRES_EVIDENCE",
+      "description": "All release-blocking findings are closed or formally accepted by authorized reviewers."
+    },
+    {
+      "id": "independent-pentest",
+      "status": "REQUIRES_EVIDENCE",
+      "description": "Independent penetration testing is complete and release blockers are closed."
+    }
+  ]
+}

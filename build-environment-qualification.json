@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "status": "BLOCKED",
+  "checks": {
+    "node": "v22.16.0",
+    "npm": "10.9.2",
+    "cargo": null,
+    "rustc": null,
+    "packageLock": false,
+    "cargoLock": false
+  },
+  "blockers": [
+    "cargo is missing",
+    "rustc is missing",
+    "package-lock.json is missing",
+    "src-tauri/Cargo.lock is missing"
+  ],
+  "generated_at": "2026-09-19T17:26:42.885Z"
+}

@@ -1,0 +1,123 @@
+{
+  "name": "@holographic-ui/core",
+  "version": "1.0.0-rc.18-production-candidate",
+  "description": "Enterprise-oriented holographic UI runtime and integration SDK for AI-native applications.",
+  "type": "module",
+  "private": false,
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.lib.json && tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -p tsconfig.lib.json --noEmit && tsc -p tsconfig.app.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "npm run typecheck && npm run test && npm run build && npm run validate:protocol && npm run security:static && npm run verify:workflows && npm run verify:release",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build",
+    "audit": "npm audit --audit-level=high",
+    "test:security": "vitest run src/core/__tests__",
+    "pack": "npm pack --ignore-scripts",
+    "lint": "tsc --noEmit",
+    "verify:release": "node scripts/verify-release.mjs",
+    "test:static": "node scripts/static-security-check.mjs",
+    "validate:protocol": "node scripts/validate-protocol.mjs",
+    "security:static": "node scripts/static-security-check.mjs",
+    "test:unit": "vitest run src/core/__tests__",
+    "release:check": "npm run typecheck && npm run test:security && npm run validate:protocol && npm run security:static && npm run verify:workflows && npm run verify:release && npm run build",
+    "prepublishOnly": "npm run release:check",
+    "verify:workflows": "node scripts/verify-workflows.mjs",
+    "qualify:native": "node scripts/qualify-native-boundary.mjs",
+    "qualify:production": "node scripts/qualify-production.mjs",
+    "verify:reproducibility": "node scripts/verify-reproducibility.mjs",
+    "qualify:cross-platform": "node scripts/qualify-cross-platform.mjs",
+    "release:qualification": "npm run verify:dependency-integrity && npm run qualify:production && npm run verify:reproducibility && npm run qualify:cross-platform && npm run qualify:build-evidence && npm run generate:release-integrity && npm run verify:release-integrity && npm run validate:protocol && npm run security:static && npm run verify:workflows && npm run verify:release",
+    "qualify:build-evidence": "node scripts/qualify-build-evidence.mjs",
+    "generate:release-integrity": "node scripts/generate-release-integrity.mjs",
+    "verify:release-integrity": "node scripts/verify-release-integrity.mjs",
+    "qualify:dependency-environment": "node scripts/qualify-dependency-environment.mjs",
+    "certify:production": "node scripts/certify-production.mjs",
+    "qualify:fuzzing": "node scripts/qualify-fuzzing.mjs",
+    "verify:lockfiles": "node scripts/verify-lockfiles.mjs",
+    "qualify:build-environment": "node scripts/qualify-build-environment.mjs",
+    "bootstrap:build": "node scripts/bootstrap-controlled-build.mjs",
+    "verify:dependency-integrity": "node scripts/verify-dependency-integrity.mjs",
+    "generate:sbom": "node scripts/generate-sbom.mjs",
+    "verify:sbom": "node scripts/verify-sbom.mjs",
+    "generate:provenance": "node scripts/generate-provenance.mjs",
+    "verify:provenance": "node scripts/verify-provenance.mjs"
+  },
+  "dependencies": {
+    "motion": "12.23.24",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "zod": "4.1.5"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "2.8.2",
+    "@types/react": "19.1.12",
+    "@types/react-dom": "19.1.9",
+    "@vitejs/plugin-react": "5.0.4",
+    "jsdom": "26.1.0",
+    "typescript": "5.9.2",
+    "vite": "7.1.5",
+    "vitest": "3.2.4"
+  },
+  "author": "Holographic UI contributors (with ChatGPT as engineering copilot)",
+  "keywords": [
+    "holographic-ui",
+    "fui",
+    "hui",
+    "ai-ui",
+    "agent-ui",
+    "cyberpunk-ui",
+    "desktop-ui",
+    "tauri",
+    "react",
+    "security"
+  ],
+  "homepage": "https://github.com/accessymail/Holographic-UI",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/accessymail/Holographic-UI.git"
+  },
+  "bugs": {
+    "url": "https://github.com/accessymail/Holographic-UI/issues"
+  },
+  "exports": {
+    ".": "./dist/lib/index.js",
+    "./react": "./dist/lib/react/index.js",
+    "./protocol": "./dist/lib/core/protocol.js",
+    "./connectors/websocket": "./dist/lib/connectors/websocket.js",
+    "./connectors/postmessage": "./dist/lib/connectors/postMessage.js",
+    "./adapters/gesture": "./dist/lib/adapters/gesture.js",
+    "./adapters/screen": "./dist/lib/adapters/screen-capture.js"
+  },
+  "files": [
+    "dist",
+    "protocols",
+    "docs",
+    "README.md",
+    "SECURITY.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "peerDependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=22.0.0 <23"
+  },
+  "verify:sbom": "node scripts/verify-sbom.mjs",
+  "generate:provenance": "node scripts/generate-provenance.mjs",
+  "verify:provenance": "node scripts/verify-provenance.mjs"
+}

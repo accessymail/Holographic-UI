@@ -1,0 +1,65 @@
+name: Native build qualification
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches: [main, 'hardening/**']
+
+permissions:
+  contents: read
+
+jobs:
+  native:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820022 # v4.4.0
+        with:
+          node-version: 22.16.0
+          package-manager-cache: false
+      - name: Require deterministic lockfiles
+        run: |
+          test -f package-lock.json
+          test -f src-tauri/Cargo.lock
+      - name: Install JavaScript dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify Rust toolchain
+        run: |
+          rustup show active-toolchain
+          rustc --version --verbose
+          cargo --version --verbose
+      - name: Cargo check
+        working-directory: src-tauri
+        run: cargo check --locked
+      - name: Cargo test
+        working-directory: src-tauri
+        run: cargo test --locked
+      - name: Cargo clippy
+        working-directory: src-tauri
+        run: cargo clippy --locked --all-targets -- -D warnings
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Unit tests
+        run: npm test
+      - name: Production web build
+        run: npm run build
+      - name: Tauri production build
+        run: npm run tauri:build
+      - name: Native build evidence
+        run: |
+          mkdir -p build-evidence
+          {
+            echo "node=$(node --version)"
+            echo "npm=$(npm --version)"
+            echo "rustc=$(rustc --version)"
+            echo "cargo=$(cargo --version)"
+            echo "commit=${GITHUB_SHA}"
+          } > build-evidence/toolchain.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: native-build-evidence
+          path: build-evidence/
+          if-no-files-found: error

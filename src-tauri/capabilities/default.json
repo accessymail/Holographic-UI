@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Minimal frontend capability set. No shell, filesystem, process, clipboard or network-native permissions are granted here.",
+  "windows": ["main"],
+  "permissions": []
+}

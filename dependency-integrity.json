@@ -1,0 +1,37 @@
+{
+  "schema": "holographic-ui/dependency-integrity/v1",
+  "generatedAt": "2026-09-19T18:04:41.641Z",
+  "checks": [
+    {
+      "name": "release-version-consistency",
+      "status": "PASS",
+      "detail": "[{\"file\":\"package.json\",\"version\":\"1.0.0-rc.18-production-candidate\"},{\"file\":\"src-tauri/Cargo.toml\",\"version\":\"1.0.0-rc.18-production-candidate\"},{\"file\":\"src-tauri/tauri.conf.json\",\"version\":\"1.0.0-rc.18-production-candidate\"},{\"file\":\"VERSION\",\"version\":\"1.0.0-rc.18-production-candidate\"},{\"file\":\"RELEASE\",\"version\":\"1.0.0-rc.18-production-candidate\"}]"
+    },
+    {
+      "name": "package-lock-present",
+      "status": "BLOCKED",
+      "detail": "Exact npm dependency graph required."
+    },
+    {
+      "name": "cargo-lock-present",
+      "status": "BLOCKED",
+      "detail": "Exact Cargo dependency graph required."
+    },
+    {
+      "name": "npm-dependency-graph",
+      "status": "BLOCKED",
+      "detail": "Cannot verify without package-lock.json."
+    },
+    {
+      "name": "cargo-dependency-graph",
+      "status": "BLOCKED",
+      "detail": "Declared requirements: tauri=2.8.1, tauri-build=2.4.1, serde_json=1, base64=0.22, ed25519-dalek=2.1"
+    },
+    {
+      "name": "expected-release-version",
+      "status": "PASS",
+      "detail": "1.0.0-rc.18-production-candidate"
+    }
+  ],
+  "certification": "BLOCKED"
+}

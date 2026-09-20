@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://holographic-ui.dev/protocols/extension-manifest.schema.json",
+  "title": "Holographic UI Extension Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "version",
+    "displayName",
+    "entry",
+    "permissions",
+    "isolation"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9._-]+$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "displayName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "entry": {
+      "type": "string",
+      "minLength": 1
+    },
+    "permissions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9.*_-]{1,80}$"
+      },
+      "maxItems": 32
+    },
+    "isolation": {
+      "enum": [
+        "builtin",
+        "sandboxed-iframe"
+      ]
+    }
+  }
+}

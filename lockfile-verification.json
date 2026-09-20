@@ -1,0 +1,27 @@
+{
+  "schema": "holographic-ui.lockfile-verification/v1",
+  "generated_at": "2026-09-19T17:24:49.417Z",
+  "status": "BLOCKED",
+  "checks": [
+    {
+      "name": "package-lock.json",
+      "status": "BLOCKED",
+      "detail": "npm lockfile must be committed for deterministic npm ci"
+    },
+    {
+      "name": "src-tauri/Cargo.lock",
+      "status": "BLOCKED",
+      "detail": "Cargo.lock must be committed for deterministic native dependency resolution"
+    },
+    {
+      "name": ".npmrc",
+      "status": "PASS",
+      "detail": "repository npm policy file present"
+    },
+    {
+      "name": "cargo toolchain",
+      "status": "BLOCKED",
+      "detail": "cargo unavailable in this environment"
+    }
+  ]
+}

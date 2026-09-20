@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0",
+  "subject": {
+    "name": "@holographic-ui/core",
+    "version": "1.0.0-rc.17.12-evidence-pipeline"
+  },
+  "source": {
+    "gitCommit": null,
+    "status": "NOT_AVAILABLE"
+  },
+  "builder": {
+    "node": "v22.16.0"
+  },
+  "materials": [
+    {
+      "path": "package.json",
+      "sha256": "ecdf3fb2b1a7bd0622433b87a33a5f1e6d22a6ac6d20924703a4c0a84f4a3953"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "sha256": "8a9384971f8591c0ea6218992b258f694b924b6189693c57825f08ddb177ab59"
+    }
+  ],
+  "evidenceStatus": {
+    "buildExecuted": false,
+    "lockfilesPresent": false,
+    "signed": false
+  }
+}

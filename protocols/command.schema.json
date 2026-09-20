@@ -1,0 +1,229 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://holographic-ui.dev/protocols/command.schema.json",
+  "title": "Holographic UI Command v1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "protocol",
+    "id",
+    "type",
+    "payload",
+    "source",
+    "authority",
+    "createdAt",
+    "expiresAt"
+  ],
+  "properties": {
+    "protocol": {
+      "const": "hui/1.0"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "type": {
+      "enum": [
+        "CARD_OPEN",
+        "CARD_CLOSE",
+        "CARD_FOCUS",
+        "CARD_MINIMIZE",
+        "CARD_RESTORE",
+        "CARD_MOVE",
+        "CARD_RESIZE",
+        "CARD_ARRANGE",
+        "CORE_STATE",
+        "NOTIFY",
+        "REQUEST_APPROVAL",
+        "APPROVAL_DECISION"
+      ]
+    },
+    "payload": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9._:-]{1,128}$"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "x",
+            "y"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "x": {
+              "type": "number",
+              "minimum": -10,
+              "maximum": 110
+            },
+            "y": {
+              "type": "number",
+              "minimum": -10,
+              "maximum": 110
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "id",
+            "width",
+            "height"
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "width": {
+              "type": "number",
+              "minimum": 10,
+              "maximum": 55
+            },
+            "height": {
+              "type": "number",
+              "minimum": 10,
+              "maximum": 48
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "state"
+          ],
+          "properties": {
+            "state": {
+              "enum": [
+                "idle",
+                "listening",
+                "thinking",
+                "executing",
+                "speaking",
+                "warning"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "message"
+          ],
+          "properties": {
+            "message": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1000
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "requestId"
+          ],
+          "properties": {
+            "requestId": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "maxProperties": 0
+        },
+        {
+          "type": "object",
+          "required": [
+            "requestId",
+            "decision"
+          ],
+          "properties": {
+            "requestId": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9._:-]{1,128}$"
+            },
+            "decision": {
+              "enum": [
+                "approved",
+                "denied"
+              ]
+            },
+            "parametersDigest": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{16,128}$"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "source": {
+      "enum": [
+        "user",
+        "gesture",
+        "ai",
+        "backend",
+        "system"
+      ]
+    },
+    "authority": {
+      "enum": [
+        "ui",
+        "session",
+        "operator",
+        "system"
+      ]
+    },
+    "createdAt": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "expiresAt": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "approvalRequired": {
+      "type": "boolean"
+    },
+    "correlationId": {
+      "type": "string",
+      "minLength": 8
+    },
+    "sessionId": {
+      "type": "string",
+      "minLength": 8
+    },
+    "nonce": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{16,128}$"
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "capabilityId": {
+      "type": "string",
+      "minLength": 8
+    }
+  }
+}

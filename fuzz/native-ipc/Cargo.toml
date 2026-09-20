@@ -1,0 +1,16 @@
+[package]
+name = "holographic-ui-native-ipc-fuzz"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[package.metadata]
+# This manifest is intentionally a scaffold until native protocol/auth logic is
+# extracted into a reusable Rust library crate. Do not add a fake lockfile.
+
+[dependencies]
+libfuzzer-sys = "0.4"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+base64 = "0.22"
+ed25519-dalek = "2.1"

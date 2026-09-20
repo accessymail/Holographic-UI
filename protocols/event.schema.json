@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://holographic-ui.dev/schemas/hui-event-1.0.json",
+  "title": "HUI/1.0 Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol", "id", "type", "timestamp", "payload"],
+  "properties": {
+    "protocol": { "const": "hui/1.0" },
+    "id": { "type": "string", "pattern": "^[A-Za-z0-9._:-]{8,160}$" },
+    "type": { "enum": ["HELLO","AUTH_REQUIRED","READY","AI_STATE","CARD_STATE","TASK_UPDATE","SCREEN_CONTEXT","GESTURE","NOTIFY","APPROVAL_REQUESTED","APPROVAL_RESOLVED","EXECUTION_RESULT","ERROR","TELEMETRY","POLICY_UPDATE"] },
+    "timestamp": { "type": "integer", "minimum": 0 },
+    "payload": {},
+    "correlationId": { "type": "string", "pattern": "^[A-Za-z0-9._:-]{8,160}$" },
+    "sessionId": { "type": "string", "pattern": "^[A-Za-z0-9._:-]{8,160}$" },
+    "nonce": { "type": "string", "pattern": "^[A-Za-z0-9_-]{16,128}$" },
+    "sequence": { "type": "integer", "minimum": 0 }
+  }
+}

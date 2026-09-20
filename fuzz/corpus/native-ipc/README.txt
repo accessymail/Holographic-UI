@@ -1,0 +1,1 @@
+Seed corpus placeholder. Add minimal valid and invalid HostRequest JSON fixtures here once the native protocol library boundary is extracted. Do not treat an empty corpus as completed fuzzing evidence.

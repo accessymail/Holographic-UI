@@ -1,0 +1,9 @@
+{
+  "name": "Holographic UI Controlled Build",
+  "build": { "dockerfile": "Dockerfile" },
+  "customizations": {
+    "vscode": {
+      "extensions": ["rust-lang.rust-analyzer", "dbaeumer.vscode-eslint"]
+    }
+  }
+}

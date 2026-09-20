@@ -1,0 +1,49 @@
+{
+  "schema": "hui/dependency-environment/1",
+  "generatedAt": "2026-09-19T16:30:22.306Z",
+  "version": "1.0.0-rc.16",
+  "environment": {
+    "node": "v22.16.0",
+    "npm": "10.9.2",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "results": [
+    {
+      "name": "version",
+      "status": "PASS",
+      "detail": "1.0.0-rc.16"
+    },
+    {
+      "name": "node-engine",
+      "status": "PASS",
+      "detail": "v22.16.0"
+    },
+    {
+      "name": "npm",
+      "status": "PASS",
+      "detail": "10.9.2"
+    },
+    {
+      "name": "npm-cache",
+      "status": "PASS",
+      "detail": "Index entries: 0 Finished in 0.009s"
+    },
+    {
+      "name": "package-lock",
+      "status": "BLOCKED",
+      "detail": "package-lock.json required for npm ci"
+    },
+    {
+      "name": "cargo",
+      "status": "BLOCKED",
+      "detail": "cargo unavailable"
+    },
+    {
+      "name": "cargo-lock",
+      "status": "BLOCKED",
+      "detail": "Cargo.lock required for cargo check --locked"
+    }
+  ],
+  "certification": "BLOCKED"
+}

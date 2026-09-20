@@ -1,0 +1,61 @@
+{
+  "generatedAt": "2026-09-19T17:17:53.267Z",
+  "version": "1.0.0-rc.17-hardening",
+  "results": [
+    {
+      "name": "node-runtime",
+      "status": "PASS",
+      "detail": "v22.16.0"
+    },
+    {
+      "name": "npm-runtime",
+      "status": "PASS",
+      "detail": "10.9.2"
+    },
+    {
+      "name": "cargo-runtime",
+      "status": "BLOCKED",
+      "detail": "cargo unavailable in qualification environment"
+    },
+    {
+      "name": "package-version",
+      "status": "PASS",
+      "detail": "1.0.0-rc.17-hardening"
+    },
+    {
+      "name": "package-lock",
+      "status": "BLOCKED",
+      "detail": "Deterministic npm install requires package-lock.json"
+    },
+    {
+      "name": "cargo-lock",
+      "status": "BLOCKED",
+      "detail": "Deterministic Cargo build requires Cargo.lock"
+    },
+    {
+      "name": "github-config",
+      "status": "PASS",
+      "detail": "Replace repository placeholders before release"
+    },
+    {
+      "name": "dependency-install",
+      "status": "BLOCKED",
+      "detail": "node_modules absent; npm ci not verifiable"
+    },
+    {
+      "name": "typecheck",
+      "status": "BLOCKED",
+      "detail": "Dependencies unavailable"
+    },
+    {
+      "name": "unit-tests",
+      "status": "BLOCKED",
+      "detail": "Dependencies unavailable"
+    },
+    {
+      "name": "production-build",
+      "status": "BLOCKED",
+      "detail": "Dependencies unavailable"
+    }
+  ]
+}

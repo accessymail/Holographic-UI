@@ -1,0 +1,52 @@
+{
+  "generatedAt": "2026-09-19T17:17:48.619Z",
+  "version": "1.0.0-rc.17-hardening",
+  "environment": {
+    "platform": "linux",
+    "arch": "x64",
+    "release": "6.18.44",
+    "node": "v22.16.0"
+  },
+  "results": [
+    {
+      "name": "runtime-platform",
+      "status": "PASS",
+      "detail": "linux-x64 (6.18.44)"
+    },
+    {
+      "name": "node-runtime",
+      "status": "PASS",
+      "detail": "v22.16.0"
+    },
+    {
+      "name": "package-version",
+      "status": "PASS",
+      "detail": "1.0.0-rc.17-hardening"
+    },
+    {
+      "name": "package-lock",
+      "status": "BLOCKED",
+      "detail": "npm ci requires a committed package-lock.json"
+    },
+    {
+      "name": "dependencies-installed",
+      "status": "BLOCKED",
+      "detail": "node_modules required for local dependency-backed qualification"
+    },
+    {
+      "name": "typecheck",
+      "status": "BLOCKED",
+      "detail": "Dependency-backed verification unavailable"
+    },
+    {
+      "name": "unit-tests",
+      "status": "BLOCKED",
+      "detail": "Dependency-backed verification unavailable"
+    },
+    {
+      "name": "production-build",
+      "status": "BLOCKED",
+      "detail": "Dependency-backed verification unavailable"
+    }
+  ]
+}

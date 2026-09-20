@@ -1,0 +1,5 @@
+* @accessymail
+/.github/ @accessymail
+/docs/ @accessymail
+/src/adapters/ @accessymail
+/src-tauri/ @accessymail
