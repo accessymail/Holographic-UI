@@ -15,7 +15,7 @@ async function sha256(file) {
 }
 
 const pkg = JSON.parse(await readFile(resolve(root, 'package.json'), 'utf8'));
-check('package-version', /^1\.0\.0-rc\.\d+(?:-hardening)?$/.test(pkg.version) ? 'PASS' : 'FAIL', pkg.version);
+check('package-version', /^1\.0\.0-rc\.\d+(?:-hardening|-production-candidate)?$/.test(pkg.version) ? 'PASS' : 'FAIL', pkg.version);
 check('node-engine', pkg.engines?.node === '>=22.0.0 <23' ? 'PASS' : 'FAIL', pkg.engines?.node ?? 'missing');
 check('npm-lock', await exists('package-lock.json') ? 'PASS' : 'BLOCKED', 'A committed npm lockfile is required for deterministic npm ci.');
 check('cargo-lock', await exists('src-tauri/Cargo.lock') ? 'PASS' : 'BLOCKED', 'A committed Cargo.lock is required for deterministic Cargo builds.');

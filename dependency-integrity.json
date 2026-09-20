@@ -1,6 +1,6 @@
 {
   "schema": "holographic-ui/dependency-integrity/v1",
-  "generatedAt": "2026-09-19T18:04:41.641Z",
+  "generatedAt": "2026-09-20T17:33:23.782Z",
   "checks": [
     {
       "name": "release-version-consistency",
@@ -9,23 +9,83 @@
     },
     {
       "name": "package-lock-present",
-      "status": "BLOCKED",
+      "status": "PASS",
       "detail": "Exact npm dependency graph required."
     },
     {
       "name": "cargo-lock-present",
-      "status": "BLOCKED",
+      "status": "PASS",
       "detail": "Exact Cargo dependency graph required."
     },
     {
-      "name": "npm-dependency-graph",
-      "status": "BLOCKED",
-      "detail": "Cannot verify without package-lock.json."
+      "name": "npm-lockfile-version",
+      "status": "PASS",
+      "detail": "3"
     },
     {
-      "name": "cargo-dependency-graph",
-      "status": "BLOCKED",
-      "detail": "Declared requirements: tauri=2.8.1, tauri-build=2.4.1, serde_json=1, base64=0.22, ed25519-dalek=2.1"
+      "name": "npm:motion",
+      "status": "PASS",
+      "detail": "declared=12.23.24; locked=12.23.24"
+    },
+    {
+      "name": "npm:react",
+      "status": "PASS",
+      "detail": "declared=19.1.1; locked=19.1.1"
+    },
+    {
+      "name": "npm:react-dom",
+      "status": "PASS",
+      "detail": "declared=19.1.1; locked=19.1.1"
+    },
+    {
+      "name": "npm:zod",
+      "status": "PASS",
+      "detail": "declared=4.1.5; locked=4.1.5"
+    },
+    {
+      "name": "npm:@tauri-apps/cli",
+      "status": "PASS",
+      "detail": "declared=2.8.2; locked=2.8.2"
+    },
+    {
+      "name": "npm:@types/react",
+      "status": "PASS",
+      "detail": "declared=19.1.12; locked=19.1.12"
+    },
+    {
+      "name": "npm:@types/react-dom",
+      "status": "PASS",
+      "detail": "declared=19.1.9; locked=19.1.9"
+    },
+    {
+      "name": "npm:@vitejs/plugin-react",
+      "status": "PASS",
+      "detail": "declared=5.0.4; locked=5.0.4"
+    },
+    {
+      "name": "npm:jsdom",
+      "status": "PASS",
+      "detail": "declared=26.1.0; locked=26.1.0"
+    },
+    {
+      "name": "npm:typescript",
+      "status": "PASS",
+      "detail": "declared=5.9.2; locked=5.9.2"
+    },
+    {
+      "name": "npm:vite",
+      "status": "PASS",
+      "detail": "declared=7.3.6; locked=7.3.6"
+    },
+    {
+      "name": "npm:vitest",
+      "status": "PASS",
+      "detail": "declared=4.1.11; locked=4.1.11"
+    },
+    {
+      "name": "cargo-lock-available",
+      "status": "PASS",
+      "detail": "Cargo.lock present; cargo --locked must be executed in controlled runner."
     },
     {
       "name": "expected-release-version",
@@ -33,5 +93,5 @@
       "detail": "1.0.0-rc.18-production-candidate"
     }
   ],
-  "certification": "BLOCKED"
+  "certification": "PASS"
 }

@@ -61,7 +61,7 @@ describe('secure execution gateway', () => {
     const authorized = await boundary.authorize(call());
     if (authorized.status !== 'ready') throw new Error('expected ready');
     const bad = new SecureExecutionGateway({
-      capabilities, sessionId,
+      capabilities, sessionId, now: () => 1500,
       tools: [{ id: 'notify', description: 'notify', risk: 'low', capabilityScope: 'tool.notify' }],
       executors: [{ tool: 'notify', risk: 'low', sandboxed: false, execute: async () => null }]
     });

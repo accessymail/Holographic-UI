@@ -1,0 +1,1 @@
+/workspaces/Holographic-UI/fuzz/target/x86_64-unknown-linux-gnu/release/native-ipc: /workspaces/Holographic-UI/fuzz/native-ipc/../../src-tauri/src/security/capability.rs /workspaces/Holographic-UI/fuzz/native-ipc/fuzz_target.rs

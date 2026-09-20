@@ -24,7 +24,7 @@ const expected = {
 const key = `${platform()}-${arch()}`;
 check('runtime-platform', expected[key] ? 'PASS' : 'WARN', `${key} (${release()})`);
 check('node-runtime', /^v22\./.test(process.version) ? 'PASS' : 'BLOCKED', process.version);
-check('package-version', /^1\.0\.0-rc\.\d+(?:-hardening)?$/.test(pkg.version) ? 'PASS' : 'FAIL', pkg.version);
+check('package-version', /^1\.0\.0-rc\.\d+(?:-hardening|-production-candidate)?$/.test(pkg.version) ? 'PASS' : 'FAIL', pkg.version);
 check('package-lock', await exists('package-lock.json') ? 'PASS' : 'BLOCKED', 'npm ci requires a committed package-lock.json');
 check('dependencies-installed', await exists('node_modules') ? 'PASS' : 'BLOCKED', 'node_modules required for local dependency-backed qualification');
 

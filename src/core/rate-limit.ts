@@ -1,5 +1,5 @@
 export class RateLimiter {
-  private windowStartedAt = Date.now();
+  private windowStartedAt: number | undefined;
   private count = 0;
 
   constructor(private readonly maxPerSecond: number, private readonly windowMs = 1000) {
@@ -7,7 +7,9 @@ export class RateLimiter {
   }
 
   accept(now = Date.now()): boolean {
-    if (now - this.windowStartedAt >= this.windowMs) {
+    if (this.windowStartedAt === undefined) {
+      this.windowStartedAt = now;
+    } else if (now - this.windowStartedAt >= this.windowMs) {
       this.windowStartedAt = now;
       this.count = 0;
     }

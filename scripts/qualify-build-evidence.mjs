@@ -17,7 +17,7 @@ const run = (name, args, timeout = 120000) => {
 };
 
 const pkg = JSON.parse(await readFile(resolve(root, 'package.json'), 'utf8'));
-check('version-format', /^1\.0\.0-rc\.\d+$/.test(pkg.version) ? 'PASS' : 'FAIL', pkg.version);
+check('version-format', /^1\.0\.0-rc\.\d+(?:-hardening|-production-candidate)?$/.test(pkg.version) ? 'PASS' : 'FAIL', pkg.version);
 check('node-runtime', /^v22\./.test(process.version) ? 'PASS' : 'BLOCKED', process.version);
 check('package-lock', await exists('package-lock.json') ? 'PASS' : 'BLOCKED', 'required for npm ci');
 check('cargo-lock', await exists('src-tauri/Cargo.lock') ? 'PASS' : 'BLOCKED', 'required for deterministic Cargo builds');

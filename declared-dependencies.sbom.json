@@ -1,110 +1,108 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:e21295d2-5d35-44c2-9bff-4e349adc2f35",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-19T18:01:41.203Z",
     "component": {
       "type": "application",
       "name": "@holographic-ui/core",
-      "version": "1.0.0-rc.17.12-evidence-pipeline"
-    },
-    "properties": [
-      {
-        "name": "evidence.status",
-        "value": "DECLARED_DEPENDENCIES_ONLY"
-      },
-      {
-        "name": "evidence.lockfiles",
-        "value": "NOT_PRESENT"
-      }
-    ]
+      "version": "1.0.0-rc.18-production-candidate"
+    }
   },
   "components": [
     {
       "type": "library",
       "name": "motion",
       "version": "12.23.24",
-      "scope": "runtime",
-      "purl": "pkg:npm/motion@12.23.24"
+      "scope": "dependencies"
     },
     {
       "type": "library",
       "name": "react",
       "version": "19.1.1",
-      "scope": "runtime",
-      "purl": "pkg:npm/react@19.1.1"
+      "scope": "dependencies"
     },
     {
       "type": "library",
       "name": "react-dom",
       "version": "19.1.1",
-      "scope": "runtime",
-      "purl": "pkg:npm/react-dom@19.1.1"
+      "scope": "dependencies"
     },
     {
       "type": "library",
       "name": "zod",
       "version": "4.1.5",
-      "scope": "runtime",
-      "purl": "pkg:npm/zod@4.1.5"
+      "scope": "dependencies"
     },
     {
       "type": "library",
       "name": "@tauri-apps/cli",
       "version": "2.8.2",
-      "scope": "development",
-      "purl": "pkg:npm/%40tauri-apps%2Fcli@2.8.2"
+      "scope": "devDependencies"
     },
     {
       "type": "library",
       "name": "@types/react",
       "version": "19.1.12",
-      "scope": "development",
-      "purl": "pkg:npm/%40types%2Freact@19.1.12"
+      "scope": "devDependencies"
     },
     {
       "type": "library",
       "name": "@types/react-dom",
       "version": "19.1.9",
-      "scope": "development",
-      "purl": "pkg:npm/%40types%2Freact-dom@19.1.9"
+      "scope": "devDependencies"
     },
     {
       "type": "library",
       "name": "@vitejs/plugin-react",
       "version": "5.0.4",
-      "scope": "development",
-      "purl": "pkg:npm/%40vitejs%2Fplugin-react@5.0.4"
+      "scope": "devDependencies"
     },
     {
       "type": "library",
       "name": "jsdom",
       "version": "26.1.0",
-      "scope": "development",
-      "purl": "pkg:npm/jsdom@26.1.0"
+      "scope": "devDependencies"
     },
     {
       "type": "library",
       "name": "typescript",
       "version": "5.9.2",
-      "scope": "development",
-      "purl": "pkg:npm/typescript@5.9.2"
+      "scope": "devDependencies"
     },
     {
       "type": "library",
       "name": "vite",
-      "version": "7.1.5",
-      "scope": "development",
-      "purl": "pkg:npm/vite@7.1.5"
+      "version": "7.3.6",
+      "scope": "devDependencies"
     },
     {
       "type": "library",
       "name": "vitest",
-      "version": "3.2.4",
-      "scope": "development",
-      "purl": "pkg:npm/vitest@3.2.4"
+      "version": "4.1.11",
+      "scope": "devDependencies"
+    },
+    {
+      "type": "library",
+      "name": "react",
+      "version": "^19.1.0",
+      "scope": "peerDependencies"
+    },
+    {
+      "type": "library",
+      "name": "react-dom",
+      "version": "^19.1.0",
+      "scope": "peerDependencies"
+    }
+  ],
+  "properties": [
+    {
+      "name": "hui.sbom.status",
+      "value": "declared-dependencies-only"
+    },
+    {
+      "name": "hui.sbom.note",
+      "value": "Resolved versions and integrity hashes require package-lock.json and a dependency-backed install."
     }
   ]
 }

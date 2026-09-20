@@ -34,9 +34,9 @@ export function App({ runtime }: { runtime: HolographicRuntime }) {
     window.addEventListener('keydown', onKey); return () => window.removeEventListener('keydown', onKey);
   }, [runtime, state.cards, state.focusedCardId]);
 
-  return <main className={`app-shell ${reduced ? 'reduced-motion' : ''}`}>
+  return <HudFrame>
+    <main className={`app-shell ${reduced ? 'reduced-motion' : ''}`}>
     <ParticleField />
-    <HudFrame />
     <header className="topbar">
       <div><span className="brand">HOLOGRAPHIC<span>UI</span></span><span className="version">/ RUNTIME 1.0</span></div>
       <div className="telemetry"><span>RENDER <b>{state.fps} FPS</b></span><span>GPU <b>AUTO</b></span><span>BUS <b>{state.connected ? (state.authenticated ? 'AUTHENTICATED' : 'CONNECTED') : 'OFFLINE'}</b></span></div>
@@ -61,5 +61,6 @@ export function App({ runtime }: { runtime: HolographicRuntime }) {
       {state.notifications[0] && <div className="toast">{state.notifications[0]}</div>}
     </section>
     <footer className="help">1 LISTEN · 2 THINK · 3 EXECUTE · A ARRANGE · M MINIMIZE · P HITL · DRAG CARDS</footer>
-  </main>;
+    </main>
+  </HudFrame>;
 }

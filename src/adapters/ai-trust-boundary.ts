@@ -3,10 +3,9 @@ import { CommandRouter } from '../core/command-router';
 import type { CapabilityRegistry } from '../core/capabilities';
 import { requiredScope } from '../core/capabilities';
 import { ReplayGuard } from '../core/security';
-import type { HoloCommand, HoloCommandType, RiskLevel } from '../core/types';
+import type { HoloCommand, RiskLevel } from '../core/types';
 
 const CARD_ID = z.string().regex(/^[a-zA-Z0-9._:-]{1,128}$/);
-const digest = z.string().regex(/^[A-Za-z0-9_-]{16,128}$/);
 
 const actionSchemas = {
   CARD_OPEN: z.object({ id: CARD_ID }).strict(),

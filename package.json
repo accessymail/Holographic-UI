@@ -60,8 +60,8 @@
     "@vitejs/plugin-react": "5.0.4",
     "jsdom": "26.1.0",
     "typescript": "5.9.2",
-    "vite": "7.1.5",
-    "vitest": "3.2.4"
+    "vite": "7.3.6",
+    "vitest": "4.1.11"
   },
   "author": "Holographic UI contributors (with ChatGPT as engineering copilot)",
   "keywords": [
@@ -116,8 +116,5 @@
   },
   "engines": {
     "node": ">=22.0.0 <23"
-  },
-  "verify:sbom": "node scripts/verify-sbom.mjs",
-  "generate:provenance": "node scripts/generate-provenance.mjs",
-  "verify:provenance": "node scripts/verify-provenance.mjs"
+  }
 }

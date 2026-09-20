@@ -1,0 +1,1 @@
+{"default":{"identifier":"default","description":"Minimal frontend capability set. No shell, filesystem, process, clipboard or network-native permissions are granted here.","local":true,"windows":["main"],"permissions":[]}}

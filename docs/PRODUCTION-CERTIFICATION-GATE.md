@@ -10,4 +10,4 @@ A release is `CERTIFIED` only when every mandatory evidence item is explicitly v
 
 ## Current baseline
 
-For RC17.1, certification is expected to remain `NOT_CERTIFIED` until the external build/security environment supplies the missing evidence. This is deliberate: the project should fail closed rather than create a false production-security claim.
+For **RC18 Production Candidate**, certification remains `NOT_CERTIFIED` until the controlled build/security environment supplies and verifies the missing evidence. This is deliberate: the project must fail closed rather than create a false production-security claim.

@@ -50,13 +50,12 @@ export class SecurityPolicyClient {
     if ((command.source === 'user' || command.source === 'gesture') && command.authority !== 'ui') return { ok: false, reason: 'invalid_authority' };
     if (command.source === 'ai' && command.authority !== 'session') return { ok: false, reason: 'ai_authority_required' };
     if ((command.source === 'ai' || command.source === 'backend') && !command.capabilityId) return { ok: false, reason: 'capability_required' };
+    if (utf8ByteLength(command.payload) > this.policy.maxPayloadBytes) return { ok: false, reason: 'payload_too_large' };
     if (!validateCommandPayload(command)) return { ok: false, reason: 'invalid_payload' };
     if (!Number.isSafeInteger(command.createdAt) || !Number.isSafeInteger(command.expiresAt)) return { ok: false, reason: 'invalid_timestamp' };
     if (command.createdAt > now + this.policy.clockSkewMs) return { ok: false, reason: 'future_timestamp' };
     if (command.expiresAt <= now) return { ok: false, reason: 'expired' };
     if (command.expiresAt <= command.createdAt) return { ok: false, reason: 'invalid_expiry' };
-    if (command.expiresAt - command.createdAt > this.policy.maxCommandTtlMs) return { ok: false, reason: 'ttl_too_long' };
-    if (utf8ByteLength(command.payload) > this.policy.maxPayloadBytes) return { ok: false, reason: 'payload_too_large' };
     if (this.policy.requireApprovalFor.has(command.type) && command.approvalRequired !== true) return { ok: false, reason: 'approval_required' };
     if (command.nonce && !this.replay.accept(command.nonce, now)) return { ok: false, reason: 'replay_detected' };
     return { ok: true };

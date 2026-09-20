@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-09-19T17:17:53.313Z",
-  "version": "1.0.0-rc.17-hardening",
-  "deterministic": false,
+  "generatedAt": "2026-09-20T17:40:35.894Z",
+  "version": "1.0.0-rc.18-production-candidate",
+  "deterministic": true,
   "results": [
     {
       "name": "package-version",
       "status": "PASS",
-      "detail": "1.0.0-rc.17-hardening"
+      "detail": "1.0.0-rc.18-production-candidate"
     },
     {
       "name": "node-engine",
@@ -15,12 +15,12 @@
     },
     {
       "name": "npm-lock",
-      "status": "BLOCKED",
+      "status": "PASS",
       "detail": "A committed npm lockfile is required for deterministic npm ci."
     },
     {
       "name": "cargo-lock",
-      "status": "BLOCKED",
+      "status": "PASS",
       "detail": "A committed Cargo.lock is required for deterministic Cargo builds."
     },
     {
@@ -31,17 +31,27 @@
     {
       "name": "manifest:package.json",
       "status": "PASS",
-      "detail": "c8a93d5bad4982abeb3ed4988617d3693fb813bdb1378083f9d821bee9b4a544"
+      "detail": "2bf538609e381bfd1606da65ff47578f5f554fe209096561a01f57c40717b775"
     },
     {
       "name": "manifest:src-tauri/Cargo.toml",
       "status": "PASS",
-      "detail": "bc858e82bd803ad0e854f585d48645802979b9ddc25ca48813d92701522ed536"
+      "detail": "f04fcdeb319ef0669bfe49311023c853d6485f96a01c822b7db5e4fd2ae443b3"
     },
     {
       "name": "manifest:src-tauri/tauri.conf.json",
       "status": "PASS",
-      "detail": "c7590ba3a9a76ddbf6a4317b51a283c92be3328f1e49af22b3a5eb2682404bed"
+      "detail": "5bd4ed43cdececc7fe9a9a76f1de194a09aa889d6d3fead1ac5b7df4598a1daa"
+    },
+    {
+      "name": "npm-lock-version",
+      "status": "PASS",
+      "detail": "3"
+    },
+    {
+      "name": "cargo-lock-size",
+      "status": "PASS",
+      "detail": "113427 bytes"
     }
   ]
 }

@@ -99,7 +99,6 @@ export class SecureExecutionGateway {
   ): Promise<ExecutionResult> {
     const now = this.now();
     this.validateEnvelope(envelope, now);
-    if (!this.replay.accept(envelope.id, now)) throw new Error('execution_replay');
 
     const tool = this.toolMap.get(envelope.tool);
     if (!tool) throw new Error('tool_not_registered');
@@ -119,6 +118,7 @@ export class SecureExecutionGateway {
     }
     const grantedRisk = this.options.capabilities.risk(envelope.capabilityId);
     if (grantedRisk !== tool.risk) throw new Error('execution_risk_mismatch');
+    if (!this.replay.accept(envelope.id, now)) throw new Error('execution_replay');
 
     const startedAt = now;
     const controller = new AbortController();

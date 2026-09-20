@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-19T17:17:53.267Z",
-  "version": "1.0.0-rc.17-hardening",
+  "generatedAt": "2026-09-20T17:37:46.539Z",
+  "version": "1.0.0-rc.18-production-candidate",
   "results": [
     {
       "name": "node-runtime",
@@ -14,22 +14,22 @@
     },
     {
       "name": "cargo-runtime",
-      "status": "BLOCKED",
-      "detail": "cargo unavailable in qualification environment"
+      "status": "PASS",
+      "detail": "cargo 1.98.1 (797e8a9bc 2026-08-05)"
     },
     {
       "name": "package-version",
       "status": "PASS",
-      "detail": "1.0.0-rc.17-hardening"
+      "detail": "1.0.0-rc.18-production-candidate"
     },
     {
       "name": "package-lock",
-      "status": "BLOCKED",
+      "status": "PASS",
       "detail": "Deterministic npm install requires package-lock.json"
     },
     {
       "name": "cargo-lock",
-      "status": "BLOCKED",
+      "status": "PASS",
       "detail": "Deterministic Cargo build requires Cargo.lock"
     },
     {
@@ -39,23 +39,23 @@
     },
     {
       "name": "dependency-install",
-      "status": "BLOCKED",
-      "detail": "node_modules absent; npm ci not verifiable"
+      "status": "PASS",
+      "detail": "node_modules present"
     },
     {
       "name": "typecheck",
-      "status": "BLOCKED",
-      "detail": "Dependencies unavailable"
+      "status": "PASS",
+      "detail": "dependency-backed TypeScript typecheck"
     },
     {
       "name": "unit-tests",
-      "status": "BLOCKED",
-      "detail": "Dependencies unavailable"
+      "status": "PASS",
+      "detail": "dependency-backed test execution"
     },
     {
       "name": "production-build",
-      "status": "BLOCKED",
-      "detail": "Dependencies unavailable"
+      "status": "PASS",
+      "detail": "production web build"
     }
   ]
 }

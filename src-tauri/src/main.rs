@@ -1,14 +1,15 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use serde::{Deserialize, Serialize};
-use std::{collections::{HashMap, HashSet}, fs, path::{Path, PathBuf}, sync::Mutex};
+use std::{
+    fs,
+    path::{Path, PathBuf},
+    sync::Mutex,
+};
 
 const MAX_PATH_BYTES: usize = 512;
 const MAX_CONTENT_BYTES: usize = 256 * 1024;
 const MAX_ISSUED_AGE_MS: i64 = 30_000;
-const MAX_CLOCK_SKEW_MS: i64 = 30_000;
-const MAX_NONCE_CACHE: usize = 4096;
-const MAX_REQUESTS_PER_MINUTE: usize = 120;
 const ISSUER_PUBLIC_KEY_B64: Option<&str> = option_env!("HUI_CAPABILITY_ISSUER_PUBLIC_KEY_B64");
 
 #[derive(Debug, Deserialize)]
@@ -22,11 +23,13 @@ enum HostOperation {
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
 struct HostRequest {
     id: String,
     operation: HostOperation,
     session_id: String,
     capability_id: String,
+    #[allow(dead_code)]
     correlation_id: Option<String>,
     path: Option<String>,
     content: Option<String>,
@@ -36,16 +39,27 @@ struct HostRequest {
     capability_token: String,
 }
 
-
-mod security { pub mod capability; }
+mod security {
+    pub mod capability;
+    pub mod state;
+}
 use security::capability::verify_capability_token;
+use security::state::NativeSecurityState;
 
 fn operation_risk(operation: &HostOperation) -> &'static str {
-    match operation { HostOperation::HostPing => "low", HostOperation::SandboxReadText => "medium", HostOperation::SandboxWriteText => "medium" }
+    match operation {
+        HostOperation::HostPing => "low",
+        HostOperation::SandboxReadText => "medium",
+        HostOperation::SandboxWriteText => "high",
+    }
 }
 
 fn operation_name(operation: &HostOperation) -> &'static str {
-    match operation { HostOperation::HostPing => "host.ping", HostOperation::SandboxReadText => "sandbox.read_text", HostOperation::SandboxWriteText => "sandbox.write_text" }
+    match operation {
+        HostOperation::HostPing => "host.ping",
+        HostOperation::SandboxReadText => "sandbox.read_text",
+        HostOperation::SandboxWriteText => "sandbox.write_text",
+    }
 }
 
 #[derive(Debug, Serialize)]
@@ -62,10 +76,15 @@ struct HostResponse {
 }
 
 fn platform_name() -> &'static str {
-    if cfg!(target_os = "windows") { "windows" }
-    else if cfg!(target_os = "macos") { "macos" }
-    else if cfg!(target_os = "linux") { "linux" }
-    else { "unknown" }
+    if cfg!(target_os = "windows") {
+        "windows"
+    } else if cfg!(target_os = "macos") {
+        "macos"
+    } else if cfg!(target_os = "linux") {
+        "linux"
+    } else {
+        "unknown"
+    }
 }
 
 fn sandbox_root() -> Result<PathBuf, String> {
@@ -98,45 +117,70 @@ fn response(operation: &'static str, value: serde_json::Value) -> HostResponse {
 
 fn safe_relative_path(root: &Path, raw: Option<&str>) -> Result<PathBuf, String> {
     let raw = raw.ok_or_else(|| "sandbox_path_required".to_string())?;
-    if raw.is_empty() || raw.len() > MAX_PATH_BYTES || raw.starts_with('/') || raw.starts_with('\\') {
+    if raw.is_empty() || raw.len() > MAX_PATH_BYTES || raw.starts_with('/') || raw.starts_with('\\')
+    {
         return Err("sandbox_path_invalid".to_string());
     }
     let raw_path = Path::new(raw);
     for component in raw_path.components() {
         match component {
-            std::path::Component::ParentDir | std::path::Component::RootDir | std::path::Component::Prefix(_) => {
+            std::path::Component::ParentDir
+            | std::path::Component::RootDir
+            | std::path::Component::Prefix(_) => {
                 return Err("sandbox_path_invalid".to_string());
             }
             _ => {}
         }
     }
     let candidate = root.join(raw);
-    let root_canonical = fs::canonicalize(root).map_err(|_| "sandbox_root_unavailable".to_string())?;
+    let root_canonical =
+        fs::canonicalize(root).map_err(|_| "sandbox_root_unavailable".to_string())?;
     if candidate.exists() {
-        let canonical = fs::canonicalize(&candidate).map_err(|_| "sandbox_path_invalid".to_string())?;
-        if !canonical.starts_with(&root_canonical) { return Err("sandbox_path_escape".to_string()); }
+        let canonical =
+            fs::canonicalize(&candidate).map_err(|_| "sandbox_path_invalid".to_string())?;
+        if !canonical.starts_with(&root_canonical) {
+            return Err("sandbox_path_escape".to_string());
+        }
         return Ok(canonical);
     }
-    let parent = candidate.parent().ok_or_else(|| "sandbox_path_invalid".to_string())?;
+    let parent = candidate
+        .parent()
+        .ok_or_else(|| "sandbox_path_invalid".to_string())?;
     fs::create_dir_all(parent).map_err(|_| "sandbox_parent_create_failed".to_string())?;
-    let parent_canonical = fs::canonicalize(parent).map_err(|_| "sandbox_path_invalid".to_string())?;
-    if !parent_canonical.starts_with(&root_canonical) { return Err("sandbox_path_escape".to_string()); }
+    let parent_canonical =
+        fs::canonicalize(parent).map_err(|_| "sandbox_path_invalid".to_string())?;
+    if !parent_canonical.starts_with(&root_canonical) {
+        return Err("sandbox_path_escape".to_string());
+    }
     Ok(candidate)
 }
 
 fn chrono_like_now_ms() -> i64 {
     use std::time::{SystemTime, UNIX_EPOCH};
-    SystemTime::now().duration_since(UNIX_EPOCH).map(|d| d.as_millis() as i64).unwrap_or(0)
+    SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .map(|d| d.as_millis() as i64)
+        .unwrap_or(0)
 }
 
 #[tauri::command]
-fn hui_native_host_execute(request: HostRequest, state: tauri::State<'_, Mutex<NativeSecurityState>>) -> Result<HostResponse, String> {
-    if !request.sandbox_only { return Err("sandbox_required".to_string()); }
-    if request.id.len() < 8 || request.session_id.len() < 8 || request.capability_id.len() < 8 || request.nonce.len() < 16 {
+fn hui_native_host_execute(
+    request: HostRequest,
+    state: tauri::State<'_, Mutex<NativeSecurityState>>,
+) -> Result<HostResponse, String> {
+    if !request.sandbox_only {
+        return Err("sandbox_required".to_string());
+    }
+    if request.id.len() < 8
+        || request.session_id.len() < 8
+        || request.capability_id.len() < 8
+        || request.nonce.len() < 16
+    {
         return Err("host_identity_invalid".to_string());
     }
     let now_ms = chrono_like_now_ms();
-    if request.issued_at <= 0 || now_ms.saturating_sub(request.issued_at).abs() > MAX_ISSUED_AGE_MS {
+    if request.issued_at <= 0 || now_ms.saturating_sub(request.issued_at).abs() > MAX_ISSUED_AGE_MS
+    {
         return Err("host_request_expired".to_string());
     }
     let issuer_key = ISSUER_PUBLIC_KEY_B64.ok_or("capability_issuer_key_unconfigured")?;
@@ -149,25 +193,45 @@ fn hui_native_host_execute(request: HostRequest, state: tauri::State<'_, Mutex<N
         &request.nonce,
         now_ms,
         issuer_key,
-    ).map_err(str::to_string)?;
-    state.lock().map_err(|_| "native_security_state_unavailable")?.admit(&request.nonce, now_ms)?;
+    )
+    .map_err(str::to_string)?;
+    state
+        .lock()
+        .map_err(|_| "native_security_state_unavailable")?
+        .admit(&request.nonce, now_ms)?;
     let root = sandbox_root()?;
 
     match request.operation {
-        HostOperation::HostPing => Ok(response("host.ping", serde_json::json!({"sandboxed": true}))),
+        HostOperation::HostPing => Ok(response(
+            "host.ping",
+            serde_json::json!({"sandboxed": true}),
+        )),
         HostOperation::SandboxReadText => {
             let path = safe_relative_path(&root, request.path.as_deref())?;
             let metadata = fs::metadata(&path).map_err(|_| "sandbox_read_failed".to_string())?;
-            if metadata.len() > MAX_CONTENT_BYTES as u64 { return Err("sandbox_file_too_large".to_string()); }
-            let content = fs::read_to_string(path).map_err(|_| "sandbox_read_failed".to_string())?;
-            Ok(response("sandbox.read_text", serde_json::json!({"content": content})))
+            if metadata.len() > MAX_CONTENT_BYTES as u64 {
+                return Err("sandbox_file_too_large".to_string());
+            }
+            let content =
+                fs::read_to_string(path).map_err(|_| "sandbox_read_failed".to_string())?;
+            Ok(response(
+                "sandbox.read_text",
+                serde_json::json!({"content": content}),
+            ))
         }
         HostOperation::SandboxWriteText => {
-            let content = request.content.ok_or_else(|| "sandbox_content_required".to_string())?;
-            if content.as_bytes().len() > MAX_CONTENT_BYTES { return Err("sandbox_content_too_large".to_string()); }
+            let content = request
+                .content
+                .ok_or_else(|| "sandbox_content_required".to_string())?;
+            if content.len() > MAX_CONTENT_BYTES {
+                return Err("sandbox_content_too_large".to_string());
+            }
             let path = safe_relative_path(&root, request.path.as_deref())?;
             fs::write(path, content).map_err(|_| "sandbox_write_failed".to_string())?;
-            Ok(response("sandbox.write_text", serde_json::json!({"written": true})))
+            Ok(response(
+                "sandbox.write_text",
+                serde_json::json!({"written": true}),
+            ))
         }
     }
 }

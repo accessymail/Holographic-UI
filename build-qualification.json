@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-19T16:28:29.987Z",
-  "version": "1.0.0-rc.15",
+  "generatedAt": "2026-09-20T17:47:49.648Z",
+  "version": "1.0.0-rc.18-production-candidate",
   "environment": {
     "node": "v22.16.0",
     "platform": "linux",
@@ -10,7 +10,7 @@
     {
       "name": "version-format",
       "status": "PASS",
-      "detail": "1.0.0-rc.15"
+      "detail": "1.0.0-rc.18-production-candidate"
     },
     {
       "name": "node-runtime",
@@ -19,44 +19,44 @@
     },
     {
       "name": "package-lock",
-      "status": "BLOCKED",
+      "status": "PASS",
       "detail": "required for npm ci"
     },
     {
       "name": "cargo-lock",
-      "status": "BLOCKED",
+      "status": "PASS",
       "detail": "required for deterministic Cargo builds"
     },
     {
       "name": "npm-ci",
-      "status": "BLOCKED",
-      "detail": "package-lock.json unavailable"
+      "status": "PASS",
+      "detail": "added 141 packages in 4s"
     },
     {
       "name": "typecheck",
-      "status": "BLOCKED",
-      "detail": "package-lock.json unavailable"
+      "status": "PASS",
+      "detail": "> @holographic-ui/core@1.0.0-rc.18-production-candidate typecheck > tsc -p tsconfig.lib.json --noEmit && tsc -p tsconfig.app.json --noEmit"
     },
     {
       "name": "tests",
-      "status": "BLOCKED",
-      "detail": "package-lock.json unavailable"
+      "status": "PASS",
+      "detail": "\u001b[2m      Tests \u001b[22m \u001b[1m\u001b[32m57 passed\u001b[39m\u001b[22m\u001b[90m (57)\u001b[39m \u001b[2m   Start at \u001b[22m 17:47:23 \u001b[2m   Duration \u001b[22m 12.46s\u001b[2m (transform 341ms, setup 0ms, import 965ms, tests 224ms, environment 8.59s)\u001b[22m"
     },
     {
       "name": "build",
-      "status": "BLOCKED",
-      "detail": "package-lock.json unavailable"
+      "status": "PASS",
+      "detail": "dist/assets/index-VDsbaQel.css   11.38 kB │ gzip:   3.18 kB dist/assets/index-BgkrRGLT.js   394.89 kB │ gzip: 123.08 kB │ map: 1,961.22 kB ✓ built in 3.48s"
     },
     {
       "name": "cargo-toolchain",
-      "status": "BLOCKED",
-      "detail": "cargo unavailable"
+      "status": "PASS",
+      "detail": "cargo 1.98.1 (797e8a9bc 2026-08-05)"
     },
     {
       "name": "cargo-check-locked",
-      "status": "BLOCKED",
-      "detail": "Cargo toolchain or Cargo.lock unavailable"
+      "status": "PASS",
+      "detail": ""
     }
   ],
-  "certification": "BLOCKED"
+  "certification": "PASS"
 }

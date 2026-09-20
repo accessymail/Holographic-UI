@@ -21,7 +21,7 @@ const cargo = command('cargo',['--version']);
 check('cargo-runtime', cargo ? 'PASS' : 'BLOCKED', cargo ?? 'cargo unavailable in qualification environment');
 
 const pkg = JSON.parse(await readFile(resolve(root,'package.json'),'utf8'));
-check('package-version', /^1\.0\.0-rc\.\d+(?:-hardening)?$/.test(pkg.version) ? 'PASS' : 'FAIL', pkg.version);
+check('package-version', /^1\.0\.0-rc\.\d+(?:-hardening|-production-candidate)?$/.test(pkg.version) ? 'PASS' : 'FAIL', pkg.version);
 check('package-lock', await exists('package-lock.json') ? 'PASS' : 'BLOCKED', 'Deterministic npm install requires package-lock.json');
 check('cargo-lock', await exists('src-tauri/Cargo.lock') ? 'PASS' : 'BLOCKED', 'Deterministic Cargo build requires Cargo.lock');
 check('github-config', !String(pkg.homepage).includes('YOUR_ORG') ? 'PASS' : 'BLOCKED', 'Replace repository placeholders before release');

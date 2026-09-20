@@ -1,0 +1,17 @@
+{
+  "schema": "holographic-ui/controlled-build/v1",
+  "generated_at": "2026-09-20T15:06:29.742Z",
+  "node": "v22.16.0",
+  "rust_toolchain_file": "rust-toolchain.toml",
+  "required_toolchain": "1.98.1",
+  "actions": [
+    {
+      "name": "generate-package-lock",
+      "status": "PASS"
+    },
+    {
+      "name": "generate-cargo-lock",
+      "status": "PASS"
+    }
+  ]
+}

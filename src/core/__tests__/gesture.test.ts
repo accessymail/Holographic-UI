@@ -5,7 +5,7 @@ function landmarks(pinchDistance: number, palmX = 0.5, palmY = 0.5) {
   const points = Array.from({ length: 21 }, () => ({ x: palmX, y: palmY, z: 0 }));
   points[4] = { x: 0.5 + pinchDistance, y: 0.5, z: 0 };
   points[8] = { x: 0.5, y: 0.5, z: 0 };
-  for (const i of [8, 12, 16, 20]) points[i] = { x: points[i]!.x, y: 0.2, z: 0 };
+  for (const i of [12, 16, 20]) points[i] = { x: points[i]!.x, y: 0.2, z: 0 };
   return points;
 }
 
